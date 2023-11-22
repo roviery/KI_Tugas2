@@ -11,6 +11,7 @@ def hex_to_binary(hex_string):
     hex_string = hex_string.lstrip('0x')
     decimal_number = int(hex_string, 16)
     binary_string = bin(decimal_number)[2:]
+    binary_string = binary_string.zfill(64)
     return binary_string
   except ValueError:
     return "Invalid hexadecimal input"
