@@ -33,12 +33,23 @@ class ChatClient:
       except socket.error:
         print("Connection lost")
         break
+  
+  def checkHex(self, s):
+    for ch in s:
+      if ((ch < '0' or ch > '9') and
+        (ch < 'A' or ch > 'F')):
+        return False
+         
+    return True
 
   def send_messages(self):
     while True:
       message = input("")
-      encrypted_message = encrypt(message)
-      self.client_socket.send(encrypted_message.encode())
+      if (self.checkHex(message) == False): 
+        print("Message bukan berupa Hex")
+      else:
+        encrypted_message = encrypt(message)
+        self.client_socket.send(encrypted_message.encode())
 
 if __name__ == "__main__":
   username = input("Enter your username: ")
